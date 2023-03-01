@@ -1,12 +1,12 @@
-name: Deploy to PyPi
+name: Deploy to Test PyPi
 
 on: 
-  release:
-      types: [created]
-
+  push:
+      branches:
+        - dev
 jobs:
-  build:
-    name: Build the release
+  build_and_deploy:
+    name: Build the release and deploy to test pypi
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -27,7 +27,8 @@ jobs:
           pip install . -U
           python setup.py sdist
       - name: Upload
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@dev
         with:
           user: __token__
           password: ${{ secrets.SHAFT_PYPI_PW }}
+          repository_url: https://test.pypi.org/legacy/
