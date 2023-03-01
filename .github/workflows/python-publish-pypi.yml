@@ -4,40 +4,42 @@ on:
   release:
       types: [created]
 
+name: Deploy to Test PyPi
+
+on: 
+  push:
+      branches:
+        - dev
 jobs:
-<<<<<<< HEAD
-  build-n-publish:
-    name: Build the release
+  build_and_deploy:
+    name: Build the release and deploy to test pypi
     runs-on: ubuntu-latest
-    if: github.event_name == 'release'
-=======
-  build:
-    name: Build the release
-    runs-on: ubuntu-latest
->>>>>>> dev
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up Python 3.8
-
+        uses: actions/checkout@master
+        
+      - name: Set up Python 3.10
         uses: actions/setup-python@v3
         with:
-          python-version: "3.8"
+          python-version: "3.10"
 
-      - name: Cache pip
-        uses: actions/cache@v2
-
-      - name: Install dependencies
+      - name: Install main dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Install package
-        run: |
-          pip install . -U
-          python setup.py sdist
-      - name: Upload
+          python -m pip install --upgrade pip twine setuptools wheel
 
-        uses: pypa/gh-action-pypi-publish@dev
+      - name: build distribution
+        run: |
+          python setup.py sdist bdist_wheel
+
+      - name: test install package
+        run: |
+          pip install -e .
+
+      - name: Publish distribution 📦 to  PyPI
+
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          user: __token__
+          skip_existing: true
+          verbose: true
           password: ${{ secrets.SHAFT_PYPI_PW }}
+          repository_url: https://upload.pypi.org/legacy/
