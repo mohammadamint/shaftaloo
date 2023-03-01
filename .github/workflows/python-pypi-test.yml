@@ -27,7 +27,7 @@ jobs:
           pip install . -U
           python setup.py sdist
       - name: Upload
-        uses: pypa/gh-action-pypi-publish@dev
+        uses: pypa/gh-action-pypi-publish@release_candidates
         with:
           user: __token__
           password: ${{ secrets.SHAFT_PYPI_PW }}
