@@ -30,10 +30,11 @@ jobs:
           pip install -e .
 
       - name: Publish distribution 📦 to Test PyPI
-        skip_existing: true
-        verbose: true
+
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          skip_existing: true
+          verbose: true
           password: ${{ secrets.SHAFT_PYPI_TEST }}
           repository_url: https://test.pypi.org/legacy/
 
