@@ -33,7 +33,6 @@ jobs:
 
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          skip_existing: true
           verbose: true
           password: ${{ secrets.SHAFT_PYPI_PW }}
           repository_url: https://upload.pypi.org/legacy/
