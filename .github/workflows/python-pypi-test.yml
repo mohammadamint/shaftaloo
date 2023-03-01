@@ -21,10 +21,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip twine setuptools
           pip setup.py sdist bdist_wheel
-      - name: Install package
+      - name: test install package
         run: |
-          pip install . -U
-          python setup.py sdist
+          pip install -e .
           
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
