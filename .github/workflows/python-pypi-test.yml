@@ -20,8 +20,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip twine setuptools
+          pip setup.py sdist bdist_wheel
       - name: Install package
         run: |
           pip install . -U
@@ -29,6 +29,7 @@ jobs:
       - name: Upload
         uses: pypa/gh-action-pypi-publish@dev
         with:
+          skip_existing: true
           user: __token__
-          password: ${{ secrets.SHAFT_PYPI_PW }}
+          password: ${{ secrets.SHAFT_PYPI_TEST }}
           repository_url: https://test.pypi.org/legacy/

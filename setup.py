@@ -3,7 +3,7 @@ from setuptools import find_packages,setup
 setup(
     name = "shaftaloo",
     description= "An open-source python package",
-    url= "https://github.com/mohammadamint/shaftaloo",
+    url= "https://github.com/mohammadamint/shaftaloo/",
     version = "0.0.1",
     packages= find_packages(),
     license="European Union Public License 1.2",
