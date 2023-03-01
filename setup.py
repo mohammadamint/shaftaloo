@@ -3,6 +3,7 @@ from setuptools import find_packages,setup
 setup(
     name = "shaftaloo",
     description= "An open-source python package",
+    long_description= "Hell",
     url= "https://github.com/mohammadamint/shaftaloo",
     version = "0.0.1",
     packages= find_packages(),
