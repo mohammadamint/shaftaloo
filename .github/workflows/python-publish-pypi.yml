@@ -5,17 +5,25 @@ on:
       types: [created]
 
 jobs:
+<<<<<<< HEAD
   build-n-publish:
     name: Build the release
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
+=======
+  build:
+    name: Build the release
+    runs-on: ubuntu-latest
+>>>>>>> dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Set up Python 3.8
+
         uses: actions/setup-python@v3
         with:
           python-version: "3.8"
+
       - name: Cache pip
         uses: actions/cache@v2
 
@@ -28,7 +36,8 @@ jobs:
           pip install . -U
           python setup.py sdist
       - name: Upload
-        uses: pypa/gh-action-pypi-publish@release/v1
+
+        uses: pypa/gh-action-pypi-publish@dev
         with:
           user: __token__
           password: ${{ secrets.SHAFT_PYPI_PW }}
